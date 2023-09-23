@@ -8,6 +8,10 @@ import Header2 from './components/Header2';
 import PersonalDetails from './components/PersonalDetails';
 import { Route, Routes } from 'react-router-dom';
 import Login from './screens/UserAuth/Login';
+import Register from './screens/UserAuth/Register';
+import Dashboard from './screens/Dashboard'
+import Report1 from './screens/Dashboard/Report1';
+import AddStudent from './screens/Student/AddStudent';
 function App() {
 
   const [firstName, setFirstName] = useState('')
@@ -32,7 +36,14 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Login />} />
+      <Route path='/' element={<Dashboard />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/report1' element={<Report1 />} />
+        <Route path='/add-student' element={<AddStudent />} />
+
+
+
       </Routes>
 
 

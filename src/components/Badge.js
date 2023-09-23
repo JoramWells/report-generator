@@ -1,5 +1,5 @@
 
-const Badge = ({text}) => {
+const Badge = ({text, width}) => {
 
     return (
         <div
@@ -8,8 +8,9 @@ const Badge = ({text}) => {
                 padding: "5px",
                 marginRight: "5px",
                 fontWeight: "500",
-                width: "12%",
-                textAlign: "center"
+                width: width? width : "12%",
+                textAlign: "center",
+                fontSize:"14px"
             }}
         >{text}</div>
     )

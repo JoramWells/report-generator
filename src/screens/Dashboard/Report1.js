@@ -1,17 +1,24 @@
-import { Box, Container, FormGroup, InputLabel, Button } from '@material-ui/core'
+import { Box, Container, FormGroup, InputLabel, Button, Paper, IconButton } from '@mui/material'
 import axios from 'axios';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useState } from 'react';
-import Header from '../components/Header';
-import Header2 from '../components/Header2';
-import PersonalDetails from '../components/PersonalDetails';
-function App() {
+import Header from '../../components/Header';
+import Header2 from '../../components/Header2';
+import PersonalDetails from '../../components/PersonalDetails';
+import CustomTable from '../../components/CustomTable';
+import Badge from '../../components/Badge';
+import Underline from '../../components/Underline';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
+
+function Report1() {
 
   const [firstName, setFirstName] = useState('')
   const [secondName, setSecondName] = useState('')
 
   const [loader, setLoader] = useState(false)
+  const navigate = useNavigate()
 
   const downloadPDF = () => {
     const capture = document.querySelector('.actual-receipt');
@@ -31,10 +38,18 @@ function App() {
     <div style={{
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: "space-between",
+      justifyContent: "center",
       height: "100vh",
       padding: "10px"
     }}>
+      <IconButton onClick={() => navigate('/')} style={{
+        position: "fixed",
+        top: "0",
+        left: "0"
+      }}>
+        <ArrowBackIcon />
+
+      </IconButton>
 
       {/* LEFT SECTION */}
       {/* <Box>
@@ -62,34 +77,65 @@ function App() {
 
 
       {/* report section */}
-      <div style={{
-        width: "793.7007874px",
-        height:"1122.519685px",
-        // margin: "30mm 45mm 30mm 45mm"
-      }}
-      className='actual-receipt'
-      >
-          <Header />
-          <Header2 />
-          <PersonalDetails />
-      </div>
-
-      
-        {/* <Box sx={{
-        display: "flex",
-        flexDirection: "column"
-      }}>
-        <div
+      <Paper>
+        <div style={{
+          width: "793.7007874px",
+          height: "1122.519685px",
+          // margin: "30mm 45mm 30mm 45mm"
+        }}
           className='actual-receipt'
+        >
+          <div style={{
+            border: "1px solid grey",
+            height: "100%"
+          }}>
+            <Header />
+            <Header2 />
+            <PersonalDetails />
+            <CustomTable />
+            <div style={{
+              marginTop: "1rem",
+              display: "flex",
+              justifyContent: 'space-evenly',
+            }}>
+              <Badge text={'Class Teachers remarks'} width={'30%'} />
+              <input style={{
+                width: "70%"
+              }} />
+            </div>
 
-        >First Name: {firstName}</div>
-        <div>
-          Second Name: {secondName}
+            {/* initials */}
+            <div style={{
+              marginTop: "1rem",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: 'space-evenly',
+            }}>
+              <Badge text={'Initials'} />
+              <Underline />
+              <Underline width='70%' />
 
+            </div>
+          </div>
+
+          <div style={{
+            marginTop: "1rem",
+            marginBottom: "1rem",
+            display: "flex",
+            justifyContent: "space-between"
+          }}>
+            <Button variant='outlined' sx={{
+              width: "40%"
+            }} onClick={() => downloadPDF()}>SAVE</Button>
+            <Button variant='contained' sx={{
+              width: "40%"
+            }} onClick={() => downloadPDF()}>DOWNLOAD</Button>
+
+          </div>
         </div>
-        <Button onClick={() => downloadPDF()}>SAVE</Button>
-      </Box> */}
-        <Button onClick={() => downloadPDF()}>SAVE</Button>
+
+      </Paper>
+
 
 
     </div>
@@ -97,4 +143,4 @@ function App() {
   );
 }
 
-export default App;
+export default Report1;
