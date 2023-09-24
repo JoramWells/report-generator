@@ -8,9 +8,9 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 
-
+// eslint-disable-next-line import/prefer-default-export
 export const mainListItems = (
-  <React.Fragment>
+  <>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
@@ -41,6 +41,5 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Integrations" />
     </ListItemButton>
-  </React.Fragment>
+  </>
 );
-

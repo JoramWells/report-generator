@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -9,7 +10,7 @@ function preventDefault(event) {
 
 export default function Deposits() {
   return (
-    <React.Fragment>
+    <>
       <Title>Recent Deposits</Title>
       <Typography component="p" variant="h4">
         $3,024.00
@@ -22,6 +23,6 @@ export default function Deposits() {
           View balance
         </Link>
       </div>
-    </React.Fragment>
+    </>
   );
 }

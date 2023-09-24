@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,26 +17,30 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import PropTypes from 'prop-types';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 
-import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
+import {
+  ListItemButton, ListItemIcon, ListItemText, ListSubheader,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
 function Copyright(props) {
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>
+      {' '}
       {new Date().getFullYear()}
-      {'.'}
+      .
     </Typography>
   );
 }
@@ -92,14 +97,14 @@ const defaultTheme = createTheme();
 export default function Dashboard({ children }) {
   const [open, setOpen] = React.useState(true);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   // main list
   const mainListItems = (
-    <React.Fragment>
+    <>
       <ListItemButton>
         <ListItemIcon>
           <DashboardIcon />
@@ -130,13 +135,11 @@ export default function Dashboard({ children }) {
         </ListItemIcon>
         <ListItemText primary="Integrations" />
       </ListItemButton>
-    </React.Fragment>
+    </>
   );
 
-
-
   const secondaryListItems = (
-    <React.Fragment>
+    <>
       <ListSubheader component="div" inset>
         Saved reports
       </ListSubheader>
@@ -158,7 +161,7 @@ export default function Dashboard({ children }) {
         </ListItemIcon>
         <ListItemText primary="Year-end sale" />
       </ListItemButton>
-    </React.Fragment>
+    </>
   );
 
   return (
@@ -167,61 +170,61 @@ export default function Dashboard({ children }) {
         <CssBaseline />
         <CssBaseline />
 
-<AppBar position="absolute" open={open}>
-    <Toolbar
-        sx={{
-            pr: '24px', // keep right padding when drawer closed
-        }}
-    >
-        <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
+        <AppBar position="absolute" open={open}>
+          <Toolbar
             sx={{
+              pr: '24px', // keep right padding when drawer closed
+            }}
+          >
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
                 marginRight: '36px',
                 ...(open && { display: 'none' }),
-            }}
-        >
-            <MenuIcon />
-        </IconButton>
-        <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-            onClick={() => navigate('/')}
-        >
-            Dashboard
-        </Typography>
-        <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-            onClick={() => navigate('/add-student')}
-        >
-            Add Student
-        </Typography>
-        <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-            onClick={() => navigate('/add-subject')}
-        >
-            Add Subject
-        </Typography>
-        <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+              onClick={() => navigate('/')}
+            >
+              Dashboard
+            </Typography>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+              onClick={() => navigate('/add-student')}
+            >
+              Add Student
+            </Typography>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+              onClick={() => navigate('/add-subject')}
+            >
+              Add Subject
+            </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
-            </Badge>
-        </IconButton>
-    </Toolbar>
-</AppBar>
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -245,10 +248,9 @@ export default function Dashboard({ children }) {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: (theme) => (theme.palette.mode === 'light'
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900]),
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
@@ -267,3 +269,8 @@ export default function Dashboard({ children }) {
     </ThemeProvider>
   );
 }
+
+Dashboard.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  children: PropTypes.node,
+};

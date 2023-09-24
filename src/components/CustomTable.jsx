@@ -1,6 +1,8 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import {
+  Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+} from '@mui/material';
 
-const CustomTable = () => {
+function CustomTable() {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -15,7 +17,7 @@ const CustomTable = () => {
 
           </TableRow>
           <TableRow>
-            <TableCell></TableCell>
+            <TableCell />
             <TableCell>Mrks</TableCell>
             <TableCell>Mrks</TableCell>
             <TableCell>Mrks</TableCell>
@@ -27,7 +29,7 @@ const CustomTable = () => {
         <TableBody>
           <TableRow>
             <TableCell>ENGLISH LANGUAGE</TableCell>
-            <TableCell></TableCell>
+            <TableCell />
             <TableCell>46</TableCell>
             <TableCell>38</TableCell>
             <TableCell>38</TableCell>
@@ -35,71 +37,102 @@ const CustomTable = () => {
           </TableRow>
           <TableRow>
             <TableCell>LITERACY 1</TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>LITERACY II</TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
-            <TableCell>          <input
-              style={{
-                width: "25px"
-              }}
-            /></TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
+            <TableCell>
+              {' '}
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>MATHEMATICS</TableCell>
             <TableCell>
               <input style={{
-                width: "25px"
-              }} />
+                width: '25px',
+              }}
+              />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
 
@@ -107,21 +140,21 @@ const CustomTable = () => {
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
@@ -130,18 +163,22 @@ const CustomTable = () => {
           {/* core */}
           <TableRow>
             <TableCell style={{
-              textAlign:"end",
-              fontWeight:"bold"
-            }}>CORE</TableCell>
+              textAlign: 'end',
+              fontWeight: 'bold',
+            }}
+            >
+              CORE
+            </TableCell>
             <TableCell>
               <input style={{
-                width: "25px"
-              }} />
+                width: '25px',
+              }}
+              />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
 
@@ -149,21 +186,21 @@ const CustomTable = () => {
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
@@ -172,17 +209,21 @@ const CustomTable = () => {
           {/* grand total */}
           <TableRow>
             <TableCell style={{
-              textAlign:"center",
-            }}>Grand Total</TableCell>
+              textAlign: 'center',
+            }}
+            >
+              Grand Total
+            </TableCell>
             <TableCell>
               <input style={{
-                width: "25px"
-              }} />
+                width: '25px',
+              }}
+              />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
 
@@ -190,21 +231,21 @@ const CustomTable = () => {
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
             <TableCell>
               <input
                 style={{
-                  width: "25px"
+                  width: '25px',
                 }}
               />
             </TableCell>
@@ -212,7 +253,7 @@ const CustomTable = () => {
         </TableBody>
       </Table>
     </TableContainer>
-  )
+  );
 }
 
-export default CustomTable
+export default CustomTable;
