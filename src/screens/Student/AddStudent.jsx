@@ -1,9 +1,8 @@
 import {
-  FormControl, Button, FormGroup, Paper, TextField, IconButton, InputLabel, Select, MenuItem,
+  FormControl, Button, FormGroup, Paper, TextField,
+  InputLabel, Select, MenuItem,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Dashboard from '../Dashboard';
 
 function AddStudent() {
@@ -16,8 +15,6 @@ function AddStudent() {
   const [subject, setSubject] = useState('');
 
   const [userData, setUserData] = useState([]);
-
-  const navigate = useNavigate();
 
   const inputValues = {
     firstName,
@@ -33,9 +30,16 @@ function AddStudent() {
   };
 
   const saveData = () => {
-    setUserData([
-      ...userData, inputValues,
-    ]);
+    const hasUser = localStorage.getItem('studentData');
+
+    if (hasUser) {
+      setUserData([
+        ...userData, inputValues,
+      ]);
+    } else {
+      setUserData([]);
+    }
+
     // const items = localStorage.getItem('studentData')
     // const data = JSON.parse(items)
     // if(data){
@@ -50,7 +54,7 @@ function AddStudent() {
 
   useEffect(() => {
     const hasUser = localStorage.getItem('studentData');
-    if (hasUser) {
+    if (hasUser && hasUser.length > 0) {
       localStorage.setItem('studentData', JSON.stringify(userData));
     }
   }, []);
@@ -60,7 +64,7 @@ function AddStudent() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        // height: '100vh',
         width: '100%',
       }}
       >
@@ -75,17 +79,7 @@ function AddStudent() {
         }}
         // elevation={3}
         >
-          <IconButton
-            onClick={() => navigate('/')}
-            style={{
-              position: 'fixed',
-              top: '0',
-              left: '0',
-            }}
-          >
-            <ArrowBackIcon />
 
-          </IconButton>
           <FormGroup style={{
             width: '80%',
           }}
@@ -99,7 +93,8 @@ function AddStudent() {
                 id="outlined-basic"
                 label="First Name"
                 variant="outlined"
-                style={{
+                size="small"
+                sx={{
                   width: '100%',
                 }}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -116,6 +111,7 @@ function AddStudent() {
                 id="outlined-basic"
                 label="Second Name"
                 variant="outlined"
+                size="small"
                 style={{
                   width: '100%',
                 }}
@@ -133,6 +129,7 @@ function AddStudent() {
                 id="outlined-basic"
                 label="Index Code"
                 variant="outlined"
+                size="small"
                 style={{
                   width: '100%',
                 }}
@@ -150,6 +147,7 @@ function AddStudent() {
                 id="outlined-basic"
                 label="House"
                 variant="outlined"
+                size="small"
                 style={{
                   width: '100%',
                 }}
@@ -167,6 +165,7 @@ function AddStudent() {
                 id="outlined-basic"
                 label="Age"
                 variant="outlined"
+                size="small"
                 style={{
                   width: '100%',
                 }}
@@ -182,6 +181,7 @@ function AddStudent() {
                 id="outlined-basic"
                 label="Division"
                 variant="outlined"
+                size="small"
                 style={{
                   width: '100%',
                 }}
@@ -196,12 +196,13 @@ function AddStudent() {
                 margin: '1rem',
               }}
             >
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <InputLabel id="demo-simple-select-label">Subject</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={subject}
                 label="Subject"
+                size="small"
                 onChange={handleChange}
               >
                 <MenuItem value={10}>Ten</MenuItem>
@@ -214,10 +215,10 @@ function AddStudent() {
               variant="contained"
               disableElevation
               style={{
-                width: '100%',
+                width: '95%',
                 margin: 'auto',
                 display: 'block',
-                padding: '10px',
+                padding: '5px',
                 marginTop: '1.5rem',
               }}
               onClick={() => saveData()}

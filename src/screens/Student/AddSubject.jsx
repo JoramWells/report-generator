@@ -65,6 +65,7 @@ function AddSubject() {
                 id="outlined-basic"
                 label="Subject Name"
                 variant="outlined"
+                size="small"
                 style={{
                   width: '100%',
                 }}
@@ -76,10 +77,10 @@ function AddSubject() {
               variant="contained"
               disableElevation
               style={{
-                width: '90%',
+                width: '95%',
                 margin: 'auto',
                 display: 'block',
-                padding: '10px',
+                padding: '5px',
                 marginTop: '1.5rem',
               }}
               onClick={() => saveData()}
