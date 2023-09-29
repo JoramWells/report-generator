@@ -56,7 +56,7 @@ export default function Orders() {
               <TableCell align="right">{row.age}</TableCell>
               <TableCell align="center">
                 <Tooltip title="Generate Report">
-                  <IconButton onClick={() => { navigate('/report1'); }}>
+                  <IconButton onClick={() => { navigate(`/report1/${row.id}`); }}>
                     <AssessmentOutlinedIcon />
                   </IconButton>
                 </Tooltip>

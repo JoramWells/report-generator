@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   FormControl, Button, FormGroup, Paper, TextField,
   InputLabel, Select, MenuItem,
@@ -12,6 +13,8 @@ function AddStudent() {
   const [indexCodeName, setIndexCodeName] = useState('');
   const [houseName, setHouseName] = useState('');
   const [age, setAge] = useState('');
+  const [term, setTerm] = useState('');
+
   // const [division, setDivision] = useState('');
   const [subject, setSubject] = useState('');
 
@@ -23,6 +26,7 @@ function AddStudent() {
     secondName,
     indexCodeName,
     houseName,
+    term,
     age,
     // division,
   };
@@ -31,34 +35,45 @@ function AddStudent() {
     setSubject(e.target.value);
   };
 
-  const saveData = () => {
-    const hasUser = localStorage.getItem('studentData');
-
-    if (hasUser) {
-      setUserData([
-        ...userData, inputValues,
-      ]);
-    } else {
-      setUserData([inputValues]);
-    }
-
-    // const items = localStorage.getItem('studentData')
-    // const data = JSON.parse(items)
-    // if(data){
-    //         const newItems = [...data, {inputValues }];
-    // localStorage.setItem('studentData', JSON.stringify(newItems))
-
-    // }
-    localStorage.setItem('studentData', JSON.stringify(userData));
-
-    console.log(userData);
+  const handleTermChange = (e) => {
+    setTerm(e.target.value);
   };
+
+  const getStudents = () => {
+    const data = localStorage.getItem('studentData');
+    return JSON.parse(data) || [];
+  };
+
+  const [students, setStudents] = useState(getStudents());
+
+  const saveStudent = (student) => {
+    localStorage.setItem('studentData', JSON.stringify(student));
+  };
+
+  const saveData = () => {
+    const newStudent = [...students, inputValues];
+    setUserData(newStudent);
+    saveStudent(newStudent);
+  };
+
+  const getSubjects = () => {
+    const data = localStorage.getItem('subjects');
+    // if (data) {
+    //   setSubjects(JSON.parse(data));
+    // }
+
+    return JSON.parse(data) || [];
+  };
+
+  const [subjects, setSubjects] = useState(getSubjects());
 
   useEffect(() => {
     const hasUser = localStorage.getItem('studentData');
     if (!hasUser && hasUser.length < 0) {
       localStorage.setItem('studentData', JSON.stringify(userData));
     }
+    getSubjects();
+    console.log(subjects, 'subjects');
   }, []);
   return (
     <Dashboard>
@@ -158,6 +173,29 @@ function AddStudent() {
               />
             </FormControl>
 
+            {/* term */}
+
+            <FormControl
+              style={{
+                margin: '1rem',
+              }}
+            >
+              <InputLabel id="demo-simple-select-label">Select Term</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={term}
+                label="Subject"
+                size="small"
+                onChange={handleTermChange}
+              >
+                <MenuItem value="BOT">BOT</MenuItem>
+                <MenuItem value="MID">MID</MenuItem>
+                <MenuItem value="EOT">EOT</MenuItem>
+
+              </Select>
+            </FormControl>
+
             <FormControl
               style={{
                 margin: '1rem',
@@ -207,9 +245,10 @@ function AddStudent() {
                 size="small"
                 onChange={handleChange}
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {subjects.map((item) => (
+                  <MenuItem value={item.subject}>{item.subject}</MenuItem>
+                ))}
+
               </Select>
             </FormControl>
 

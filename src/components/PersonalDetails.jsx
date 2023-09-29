@@ -1,8 +1,12 @@
-import React from 'react';
+/* eslint-disable react/jsx-one-expression-per-line */
+import PropTypes from 'prop-types';
 import Badge from './Badge';
 import Underline from './Underline';
+import logo from '../imgs/logo.png';
 
-function PersonalDetails() {
+function PersonalDetails({
+  firstName, secondName, age, house,
+}) {
   return (
     <div style={{
       display: 'flex',
@@ -36,13 +40,23 @@ function PersonalDetails() {
         </div>
         <div style={{
           display: 'flex',
-          justifyContent: 'space-evenly',
+          justifyContent: 'flex-start',
           alignItems: 'flex-end',
           marginTop: '5px',
         }}
         >
           <Badge text="Name" />
-          <Underline width="55.4%" />
+          <div style={{
+            display: 'flex',
+            fontWeight: 'bold',
+            borderBottom: '1px solid black',
+            width: '40%',
+            textTransform: 'uppercase',
+          }}
+          >
+            {firstName} {secondName}
+          </div>
+          {/* <Underline width="55.4%" /> */}
           <Underline width="10%" />
           <Underline width="14%" />
 
@@ -56,9 +70,29 @@ function PersonalDetails() {
         }}
         >
           <Badge text="House" />
-          <Underline />
+          <div
+            style={{
+              display: 'flex',
+              fontWeight: 'bold',
+              borderBottom: '1px solid black',
+              width: '20%',
+              textTransform: 'uppercase',
+            }}
+          >
+            {house}
+          </div>
           <Badge text="Age" />
-          <Underline width="13%" />
+          <div
+            style={{
+              display: 'flex',
+              fontWeight: 'bold',
+              borderBottom: '1px solid black',
+              width: '20%',
+              textTransform: 'uppercase',
+            }}
+          >
+            {age}
+          </div>
           <Underline width="35%" />
 
         </div>
@@ -85,10 +119,36 @@ function PersonalDetails() {
         border: '1px solid black',
       }}
       >
-        logo
+        <img
+          src={logo}
+          alt="company logo"
+          style={{
+            width: '100px',
+            height: '100px',
+            objectFit: 'contain',
+            marginRight: '5rem',
+
+          }}
+        />
       </div>
     </div>
   );
 }
 
 export default PersonalDetails;
+
+PersonalDetails.defaultProps = {
+  firstName: '',
+  secondName: '',
+  age: '',
+  house: '',
+
+};
+
+PersonalDetails.propTypes = {
+  firstName: PropTypes.string,
+  secondName: PropTypes.string,
+  age: PropTypes.string,
+  house: PropTypes.string,
+
+};

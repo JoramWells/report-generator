@@ -27,7 +27,7 @@ function App() {
         <Route exact path="/" element={<HomeDashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/report1" element={<Report1 />} />
+        <Route path="/report1/:id?" element={<Report1 />} />
         <Route path="/add-student" element={<AddStudent />} />
         <Route path="/add-subject" element={<AddSubject />} />
 

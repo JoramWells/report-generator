@@ -1,34 +1,47 @@
 import {
   FormControl, Button, FormGroup, Paper, TextField,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import SaveIcon from '@mui/icons-material/Save';
 
 import Dashboard from '../Dashboard';
 
 function AddSubject() {
-  const [firstName, setFirstName] = useState('');
+  const getSubjects = () => {
+    const data = localStorage.getItem('subjects');
+    return JSON.parse(data) || [];
+  };
+  const [subject, setSubject] = useState('');
 
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(getSubjects());
 
   const inputValues = {
-    firstName,
+    subject,
 
+  };
+
+  // const getSubjects = () => {
+  //   const temp = localStorage.getItem('todos');
+  //   const savedUsers = JSON.parse(temp);
+  //   return savedUsers || [];
+  // };
+
+  // const [subjects, setSubjects] = useState(getSubjects());
+
+  const saveSubject = (subjects) => {
+    localStorage.setItem('subjects', JSON.stringify(subjects));
   };
 
   const saveData = () => {
-    setUserData([
-      ...userData, inputValues,
-    ]);
-
-    localStorage.setItem('studentData', JSON.stringify(userData));
-
-    console.log(userData);
+    const newSubject = [...userData, inputValues];
+    setUserData(newSubject);
+    saveSubject(newSubject);
   };
 
   useEffect(() => {
-    const hasUser = localStorage.getItem('studentData');
-    if (!hasUser && hasUser.length < 0) {
-      localStorage.setItem('studentData', JSON.stringify(userData));
+    const hasUser = localStorage.getItem('subjects');
+    if (hasUser && hasUser.length < 0) {
+      localStorage.setItem('subjects', JSON.stringify(userData));
     }
   }, []);
   return (
@@ -44,6 +57,7 @@ function AddSubject() {
 
         <Paper style={{
           width: '50%',
+          height: '50%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -69,7 +83,7 @@ function AddSubject() {
                 style={{
                   width: '100%',
                 }}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => setSubject(e.target.value)}
               />
             </FormControl>
 
@@ -77,13 +91,15 @@ function AddSubject() {
               variant="contained"
               disableElevation
               style={{
-                width: '95%',
+                width: '94%',
                 margin: 'auto',
-                display: 'block',
-                padding: '5px',
-                marginTop: '1.5rem',
+                // display: 'block',
+                padding: '10px',
+                marginTop: '2.5rem',
+                backgroundColor: '#291749',
               }}
               onClick={() => saveData()}
+              endIcon={<SaveIcon />}
             >
               SAVE
             </Button>

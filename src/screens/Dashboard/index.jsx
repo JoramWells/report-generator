@@ -23,12 +23,15 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
+import AirIcon from '@mui/icons-material/Air';
 
 import {
+  Collapse,
   ListItemButton, ListItemIcon, ListItemText, ListSubheader,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import { ExpandLess, ExpandMore, StarBorder } from '@material-ui/icons';
 import AccountMenu from '../../components/DashboardMenu';
 
 const drawerWidth = 240;
@@ -82,6 +85,8 @@ const defaultTheme = createTheme();
 
 export default function Dashboard({ children }) {
   const [open, setOpen] = React.useState(true);
+  const [menuOpen, setMenuOpen] = React.useState(true);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const navigate = useNavigate();
@@ -91,6 +96,11 @@ export default function Dashboard({ children }) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleMenuOpen = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -116,6 +126,40 @@ export default function Dashboard({ children }) {
         </ListItemIcon>
         <ListItemText primary="Primary" />
       </ListItemButton>
+
+      {/* Streams */}
+      <ListItemButton onClick={handleMenuOpen}>
+        <ListItemIcon>
+          <AirIcon />
+        </ListItemIcon>
+        <ListItemText primary="Streams" />
+        {menuOpen ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={menuOpen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{
+            pl: 4, pt: 0, pb: 0, fontSize: '10px',
+          }}
+          >
+            <ListItemIcon />
+            <ListItemText
+              primary="BOT"
+              sx={{
+                fontSize: '10px',
+                fontWeight: 'bold',
+              }}
+            />
+          </ListItemButton>
+          <ListItemButton sx={{ pl: 4, pt: 0, pb: 0 }}>
+            <ListItemIcon />
+            <ListItemText primary="MID" />
+          </ListItemButton>
+          <ListItemButton sx={{ pl: 4, pt: 0, pb: 0 }}>
+            <ListItemIcon />
+            <ListItemText primary="EOT" />
+          </ListItemButton>
+        </List>
+      </Collapse>
       <ListItemButton>
         <ListItemIcon>
           <BarChartIcon />
@@ -163,7 +207,13 @@ export default function Dashboard({ children }) {
         <CssBaseline />
         <CssBaseline />
 
-        <AppBar position="absolute" open={open}>
+        <AppBar
+          position="absolute"
+          open={open}
+          style={{
+            backgroundColor: '#291749',
+          }}
+        >
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed

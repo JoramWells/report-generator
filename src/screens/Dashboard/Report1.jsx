@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Button, Paper, IconButton,
 } from '@mui/material';
@@ -5,7 +6,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useEffect, useState } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../components/Header';
 import Header2 from '../../components/Header2';
 import PersonalDetails from '../../components/PersonalDetails';
@@ -17,8 +18,9 @@ import Dashboard from '.';
 function Report1() {
   const [loader, setLoader] = useState(false);
   const [studentData, setStudentData] = useState([]);
-  const [results, setUserResults] = useState(studentData);
   const navigate = useNavigate();
+
+  const { id } = useParams();
 
   const downloadPDF = () => {
     const capture = document.querySelector('.actual-receipt');
@@ -35,46 +37,54 @@ function Report1() {
     });
   };
 
-  const getStudentId = (id) => {
-    if (results && results.length > 0) {
-      const userResults = results.filter(
-        (user) => user.id.toLowerCase().includes(id.toLowerCase()),
-      );
-      setUserResults(userResults);
-      console.log('resulsts', results);
-    }
+  const getStudents = () => {
+    const data = localStorage.getItem('studentData');
+    return JSON.parse(data) || [];
+  };
+  const [results, setUserResults] = useState(getStudents());
+
+  const students = getStudents();
+
+  const getStudentId = (routeID) => {
+    const userResults = students.filter(
+      (user) => user.id.toLowerCase().includes(routeID.toLowerCase()),
+    );
+    setUserResults(userResults);
   };
   useEffect(() => {
-    const studentData2 = localStorage.getItem('studentData');
-    const data = JSON.parse(studentData2);
-    setStudentData(data);
-    getStudentId();
-  }, []);
+    getStudentId(id);
+    console.log(results, 'resultsx');
+  }, [id]);
 
   return (
     <Dashboard>
       <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        height: '100vh',
-        padding: '10px',
+        width: '80%',
+        float: 'right',
       }}
       >
-        <IconButton
-          onClick={() => navigate('/')}
-          style={{
-            position: 'fixed',
-            top: '0',
-            left: '0',
-          }}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          height: '100vh',
+          padding: '10px',
+        }}
         >
-          <ArrowBackIcon />
+          <IconButton
+            onClick={() => navigate('/')}
+            style={{
+              position: 'fixed',
+              top: '0',
+              left: '0',
+            }}
+          >
+            <ArrowBackIcon />
 
-        </IconButton>
+          </IconButton>
 
-        {/* LEFT SECTION */}
-        {/* <Box>
+          {/* LEFT SECTION */}
+          {/* <Box>
         <FormGroup >
           <div>
             <InputLabel htmlFor="my-input">First Name</InputLabel>
@@ -96,86 +106,99 @@ function Report1() {
         </FormGroup >
       </Box> */}
 
-        {/* report section */}
-        <Paper>
-          <div
-            style={{
-              width: '793.7007874px',
-              height: '1122.519685px',
-              // margin: "30mm 45mm 30mm 45mm"
-            }}
-            className="actual-receipt"
-          >
-            <div style={{
-              border: '1px solid grey',
-              height: '100%',
-            }}
+          {/* report section */}
+          <Paper>
+            <div
+              style={{
+                width: '793.7007874px',
+                height: '1122.519685px',
+                // margin: "30mm 45mm 30mm 45mm"
+              }}
+              className="actual-receipt"
             >
-              <Header />
-              <Header2 />
-              <PersonalDetails />
-              <CustomTable />
               <div style={{
-                marginTop: '1rem',
-                display: 'flex',
-                justifyContent: 'space-evenly',
+                border: '1px solid grey',
+                height: '100%',
               }}
               >
-                <Badge text="Class Teachers remarks" width="30%" />
-                <input style={{
-                  width: '70%',
-                }}
+                <Header />
+                <Header2 />
+                <PersonalDetails
+                  firstName={results[0].firstName}
+                  secondName={results[0].secondName}
+                  age={results[0].age}
+                  house={results[0].houseName}
                 />
+
+                <div style={{
+                  padding: '10px',
+                }}
+                >
+                  <CustomTable />
+                </div>
+
+                <div style={{
+                  marginTop: '1rem',
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                }}
+                >
+                  <Badge text="Class Teachers remarks" width="30%" />
+                  <input style={{
+                    width: '70%',
+                  }}
+                  />
+                </div>
+
+                {/* initials */}
+                <div style={{
+                  marginTop: '1rem',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  justifyContent: 'space-evenly',
+                }}
+                >
+                  <Badge text="Initials" />
+                  <Underline />
+                  <Underline width="70%" />
+
+                </div>
               </div>
 
-              {/* initials */}
               <div style={{
                 marginTop: '1rem',
+                marginBottom: '1rem',
                 display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'space-evenly',
+                justifyContent: 'space-between',
               }}
               >
-                <Badge text="Initials" />
-                <Underline />
-                <Underline width="70%" />
+                <Button
+                  variant="outlined"
+                  sx={{
+                    width: '40%',
+                  }}
+                  onClick={() => downloadPDF()}
+                >
+                  SAVE
+
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: '40%',
+                  }}
+                  onClick={() => downloadPDF()}
+                >
+                  DOWNLOAD
+
+                </Button>
 
               </div>
             </div>
 
-            <div style={{
-              marginTop: '1rem',
-              marginBottom: '1rem',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-            >
-              <Button
-                variant="outlined"
-                sx={{
-                  width: '40%',
-                }}
-                onClick={() => downloadPDF()}
-              >
-                SAVE
+          </Paper>
 
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  width: '40%',
-                }}
-                onClick={() => downloadPDF()}
-              >
-                DOWNLOAD
-
-              </Button>
-
-            </div>
-          </div>
-
-        </Paper>
-
+        </div>
       </div>
     </Dashboard>
 

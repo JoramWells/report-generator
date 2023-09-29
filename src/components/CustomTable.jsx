@@ -1,178 +1,132 @@
+/* eslint-disable no-unused-vars */
 import {
   Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import TableHeader from './TableHeader';
 
 function CustomTable() {
-  const [studentInfo, setStudentInfo] = useState([]);
+  const getSubjects = () => {
+    const data = localStorage.getItem('subjects');
+    // if (data) {
+    //   setSubjects(JSON.parse(data));
+    // }
 
-  const getData = () => {
-    const studentData = localStorage.getItem('studentData');
-    const data = JSON.parse(studentData);
-    if (data) { setStudentInfo(data); }
+    return JSON.parse(data) || [];
   };
+
+  const [subjects, setSubjects] = useState(getSubjects());
+
   useEffect(() => {
-    getData();
   }, []);
 
-  console.log(studentInfo);
-
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>SUBJECT</TableCell>
-            <TableCell>BOT</TableCell>
-            <TableCell>MID</TableCell>
-            <TableCell>EOT</TableCell>
-            <TableCell>AVERAGE</TableCell>
-            <TableCell>Subje Teachers</TableCell>
+    <TableContainer>
+      <TableHeader />
 
-          </TableRow>
+      <Table sx={{
+        '& .MuiTableCell-root': {
+          border: '1px solid black',
+        },
+      }}
+      >
+        <TableHead>
+
           <TableRow>
-            <TableCell />
+            <TableCell width={200} />
             <TableCell>Mrks</TableCell>
             <TableCell>Mrks</TableCell>
             <TableCell>Mrks</TableCell>
-            <TableCell>Agg</TableCell>
+            <TableCell
+              style={{
+                fontWeight: 'bold',
+                textAlign: 'center',
+                backgroundColor: 'whitesmoke',
+              }}
+            >
+              Mrks
+
+            </TableCell>
+            <TableCell
+              width={66}
+              style={{
+                fontWeight: 'bold',
+                textAlign: 'center',
+                backgroundColor: 'whitesmoke',
+              }}
+            >
+              Agg
+
+            </TableCell>
+
             <TableCell>Remarks</TableCell>
+            <TableCell>Initials</TableCell>
 
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell>ENGLISH LANGUAGE</TableCell>
-            <TableCell />
-            <TableCell>46</TableCell>
-            <TableCell>38</TableCell>
-            <TableCell>38</TableCell>
-            <TableCell>P8</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>LITERACY 1</TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>LITERACY II</TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              {' '}
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>MATHEMATICS</TableCell>
-            <TableCell>
-              <input style={{
-                width: '25px',
-              }}
-              />
-            </TableCell>
-            <TableCell>
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
 
-            </TableCell>
-            <TableCell>
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              <input
-                style={{
-                  width: '25px',
-                }}
-              />
-            </TableCell>
-          </TableRow>
+          {subjects.map((item) => (
+            <TableRow key={item.subject}>
+              <TableCell>{item.subject}</TableCell>
+              <TableCell>
+                {' '}
+                <input
+                  style={{
+                    width: '25px',
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                {' '}
+                <input
+                  style={{
+                    width: '25px',
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                {' '}
+                <input
+                  style={{
+                    width: '25px',
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                {' '}
+                <input
+                  style={{
+                    width: '25px',
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                {' '}
+                <input
+                  style={{
+                    width: '25px',
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                {' '}
+                <input
+                  style={{
+                    width: '25px',
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                {' '}
+                <input
+                  style={{
+                    width: '25px',
+                  }}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
 
           {/* core */}
           <TableRow>
@@ -188,6 +142,22 @@ function CustomTable() {
                 width: '25px',
               }}
               />
+            </TableCell>
+            <TableCell>
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+
+            </TableCell>
+            <TableCell>
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+
             </TableCell>
             <TableCell>
               <input
@@ -233,6 +203,22 @@ function CustomTable() {
                 width: '25px',
               }}
               />
+            </TableCell>
+            <TableCell>
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+
+            </TableCell>
+            <TableCell>
+              <input
+                style={{
+                  width: '25px',
+                }}
+              />
+
             </TableCell>
             <TableCell>
               <input
