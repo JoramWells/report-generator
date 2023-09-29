@@ -3,6 +3,7 @@ import {
   InputLabel, Select, MenuItem,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 import Dashboard from '../Dashboard';
 
 function AddStudent() {
@@ -17,6 +18,7 @@ function AddStudent() {
   const [userData, setUserData] = useState([]);
 
   const inputValues = {
+    id: nanoid(),
     firstName,
     secondName,
     indexCodeName,
@@ -37,7 +39,7 @@ function AddStudent() {
         ...userData, inputValues,
       ]);
     } else {
-      setUserData([]);
+      setUserData([inputValues]);
     }
 
     // const items = localStorage.getItem('studentData')
@@ -54,7 +56,7 @@ function AddStudent() {
 
   useEffect(() => {
     const hasUser = localStorage.getItem('studentData');
-    if (hasUser && hasUser.length > 0) {
+    if (!hasUser && hasUser.length < 0) {
       localStorage.setItem('studentData', JSON.stringify(userData));
     }
   }, []);

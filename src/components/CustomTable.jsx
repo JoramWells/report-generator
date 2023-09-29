@@ -1,8 +1,22 @@
 import {
   Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
 } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 function CustomTable() {
+  const [studentInfo, setStudentInfo] = useState([]);
+
+  const getData = () => {
+    const studentData = localStorage.getItem('studentData');
+    const data = JSON.parse(studentData);
+    if (data) { setStudentInfo(data); }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(studentInfo);
+
   return (
     <TableContainer component={Paper}>
       <Table>

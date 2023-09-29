@@ -27,7 +27,7 @@ function AddSubject() {
 
   useEffect(() => {
     const hasUser = localStorage.getItem('studentData');
-    if (hasUser) {
+    if (!hasUser && hasUser.length < 0) {
       localStorage.setItem('studentData', JSON.stringify(userData));
     }
   }, []);

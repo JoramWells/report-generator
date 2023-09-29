@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -16,6 +16,8 @@ import Dashboard from '.';
 
 function Report1() {
   const [loader, setLoader] = useState(false);
+  const [studentData, setStudentData] = useState([]);
+  const [results, setUserResults] = useState(studentData);
   const navigate = useNavigate();
 
   const downloadPDF = () => {
@@ -32,6 +34,22 @@ function Report1() {
       doc.save('receipt.pdf');
     });
   };
+
+  const getStudentId = (id) => {
+    if (results && results.length > 0) {
+      const userResults = results.filter(
+        (user) => user.id.toLowerCase().includes(id.toLowerCase()),
+      );
+      setUserResults(userResults);
+      console.log('resulsts', results);
+    }
+  };
+  useEffect(() => {
+    const studentData2 = localStorage.getItem('studentData');
+    const data = JSON.parse(studentData2);
+    setStudentData(data);
+    getStudentId();
+  }, []);
 
   return (
     <Dashboard>

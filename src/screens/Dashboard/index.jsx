@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -28,6 +29,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import AccountMenu from '../../components/DashboardMenu';
 
 const drawerWidth = 240;
 
@@ -80,10 +82,17 @@ const defaultTheme = createTheme();
 
 export default function Dashboard({ children }) {
   const [open, setOpen] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const navigate = useNavigate();
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   // main list
@@ -93,7 +102,7 @@ export default function Dashboard({ children }) {
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText primary="Dashboard" onClick={() => navigate('/')} />
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>
@@ -105,19 +114,19 @@ export default function Dashboard({ children }) {
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Customers" />
+        <ListItemText primary="Primary" />
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
-        <ListItemText primary="Subjects" />
+        <ListItemText primary="ECD" />
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
-        <ListItemText primary="Integrations" />
+        <ListItemText primary="Subjects" />
       </ListItemButton>
     </>
   );

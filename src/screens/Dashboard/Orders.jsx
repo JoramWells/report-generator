@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from 'react';
 import Table from '@mui/material/Table';
@@ -6,8 +7,9 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Title from './Title';
 
 export default function Orders() {
@@ -19,6 +21,12 @@ export default function Orders() {
     const studentData = localStorage.getItem('studentData');
     const data = JSON.parse(studentData);
     if (data) { setStudentInfo(data); }
+  };
+
+  const deleteStudent = (id) => {
+    setStudentInfo(studentInfo.filter((student) => student.id !== id));
+    localStorage.setItem('studentData', JSON.stringify(studentInfo));
+    // localStorage.todo
   };
 
   React.useEffect(() => {
@@ -36,7 +44,7 @@ export default function Orders() {
             <TableCell>Second Name</TableCell>
             <TableCell>Index Code</TableCell>
             <TableCell>Age</TableCell>
-            <TableCell align="right">Action</TableCell>
+            <TableCell align="center">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -46,10 +54,22 @@ export default function Orders() {
               <TableCell>{row.secondName}</TableCell>
               <TableCell>{row.indexCodeName}</TableCell>
               <TableCell align="right">{row.age}</TableCell>
-              <TableCell align="right">
-                <IconButton onClick={() => { navigate('/report1'); }}>
-                  <AssessmentOutlinedIcon />
-                </IconButton>
+              <TableCell align="center">
+                <Tooltip title="Generate Report">
+                  <IconButton onClick={() => { navigate('/report1'); }}>
+                    <AssessmentOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton
+                    style={{
+                      color: '#FD6868',
+                    }}
+                    onClick={() => { deleteStudent(row.id); }}
+                  >
+                    <DeleteOutlineIcon />
+                  </IconButton>
+                </Tooltip>
               </TableCell>
             </TableRow>
           ))}
