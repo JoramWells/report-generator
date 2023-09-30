@@ -3,3 +3,12 @@ export const getStudents = () => {
   const data = localStorage.getItem('studentData');
   return JSON.parse(data) || [];
 };
+
+export const saveStudentSubjects = (subjects) => {
+  localStorage.setItem('studentSubjects', JSON.stringify(subjects));
+};
+
+export const getStudentSubjects = () => {
+  const data = localStorage.getItem('studentSubjects');
+  return JSON.parse(data) || [];
+};

@@ -5,10 +5,13 @@ import {
 import { useEffect, useState } from 'react';
 
 import TableHeader from './TableHeader';
+import { useSubjectApi } from '../hooks/useSubjectApi';
 
 function CustomTable() {
+  const { saveStudentSubjectByID, studentSubjectByID } = useSubjectApi();
+
   const getSubjects = () => {
-    const data = localStorage.getItem('subjects');
+    const data = localStorage.getItem('studentSubjects');
     // if (data) {
     //   setSubjects(JSON.parse(data));
     // }
@@ -67,26 +70,16 @@ function CustomTable() {
         </TableHead>
         <TableBody>
 
-          {subjects.map((item) => (
+          {studentSubjectByID.map((item) => (
             <TableRow key={item.subject}>
               <TableCell>{item.subject}</TableCell>
               <TableCell>
-                {' '}
-                <input
-                  style={{
-                    width: '25px',
-                    backgroundColor: 'black',
-                  }}
-                  placeholder="name"
-                />
+                {item.term === 'BOT' && item.marks}
+
               </TableCell>
               <TableCell>
-                {' '}
-                <input
-                  style={{
-                    width: '25px',
-                  }}
-                />
+                {item.term === 'MID' && item.marks}
+
               </TableCell>
               <TableCell>
                 {' '}
