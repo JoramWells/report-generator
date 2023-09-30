@@ -85,7 +85,9 @@ const defaultTheme = createTheme();
 
 export default function Dashboard({ children }) {
   const [open, setOpen] = React.useState(true);
-  const [menuOpen, setMenuOpen] = React.useState(true);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  const [studentOpen, setStudentOpen] = React.useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -101,6 +103,10 @@ export default function Dashboard({ children }) {
     setMenuOpen(!menuOpen);
   };
 
+  const handleStudentOpen = () => {
+    setStudentOpen(!studentOpen);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -114,12 +120,29 @@ export default function Dashboard({ children }) {
         </ListItemIcon>
         <ListItemText primary="Dashboard" onClick={() => navigate('/')} />
       </ListItemButton>
-      <ListItemButton>
+
+      {/* students */}
+      <ListItemButton onClick={handleStudentOpen}>
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <AirIcon />
         </ListItemIcon>
         <ListItemText primary="Students" />
+        {studentOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
+      <Collapse in={studentOpen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+
+          <ListItemButton sx={{ pl: 4, pt: 0, pb: 0 }}>
+            <ListItemIcon />
+            <ListItemText primary="Add Student" />
+          </ListItemButton>
+          <ListItemButton sx={{ pl: 4, pt: 0, pb: 0 }}>
+            <ListItemIcon />
+            <ListItemText primary="View Students" />
+          </ListItemButton>
+        </List>
+      </Collapse>
+
       <ListItemButton>
         <ListItemIcon>
           <PeopleIcon />

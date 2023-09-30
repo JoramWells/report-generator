@@ -5,6 +5,7 @@ import Report1 from './screens/Dashboard/Report1';
 import AddStudent from './screens/Student/AddStudent';
 import HomeDashboard from './screens/Dashboard/HomeDashboard';
 import AddSubject from './screens/Student/AddSubject';
+import StudentProfile from './screens/Student/StudentProfile';
 
 function App() {
   // const downloadPDF = () => {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/report1/:id?" element={<Report1 />} />
         <Route path="/add-student" element={<AddStudent />} />
         <Route path="/add-subject" element={<AddSubject />} />
+        <Route path="/student-profile/:id?" element={<StudentProfile />} />
 
       </Routes>
 

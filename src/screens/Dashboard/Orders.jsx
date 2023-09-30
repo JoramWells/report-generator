@@ -10,6 +10,7 @@ import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import { IconButton, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import Title from './Title';
 
 export default function Orders() {
@@ -55,6 +56,11 @@ export default function Orders() {
               <TableCell>{row.indexCodeName}</TableCell>
               <TableCell align="right">{row.age}</TableCell>
               <TableCell align="center">
+                <Tooltip title="Student Profile">
+                  <IconButton onClick={() => { navigate(`/student-profile/${row.id}`); }}>
+                    <RemoveRedEyeOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
                 <Tooltip title="Generate Report">
                   <IconButton onClick={() => { navigate(`/report1/${row.id}`); }}>
                     <AssessmentOutlinedIcon />

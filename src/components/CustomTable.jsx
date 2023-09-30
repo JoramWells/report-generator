@@ -3,6 +3,7 @@ import {
   Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+
 import TableHeader from './TableHeader';
 
 function CustomTable() {
@@ -74,7 +75,9 @@ function CustomTable() {
                 <input
                   style={{
                     width: '25px',
+                    backgroundColor: 'black',
                   }}
+                  placeholder="name"
                 />
               </TableCell>
               <TableCell>
