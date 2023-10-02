@@ -13,6 +13,8 @@ import { getSubjects } from '../../utils/subjectFuncs';
 import { useSubjectApi } from '../../hooks/useSubjectApi';
 import StudentPerformance from './StudentPerformance';
 import profile from '../../imgs/profile.png';
+import StudentPerformanceChart from './StudentPerfomanceChart';
+import StudentPerformanceBarChart from './StudentPerformanceBarChart';
 
 const style = {
   position: 'absolute',
@@ -68,7 +70,7 @@ function StudentProfile() {
 
   return (
     <Dashboard>
-      <Grid item xs={12} md={8} lg={9}>
+      <Grid item xs={12} md={6} lg={3}>
         <Paper
           sx={{
             p: 2,
@@ -77,7 +79,33 @@ function StudentProfile() {
             height: 240,
           }}
         >
-          profile
+          <Typography
+            variant="h6"
+            style={{
+              color: 'primary',
+            }}
+          >Performace Analysis
+          </Typography>
+          <StudentPerformanceChart />
+        </Paper>
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <Paper
+          sx={{
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            height: 240,
+          }}
+        >
+          <Typography
+            variant="h6"
+            style={{
+              color: 'primary',
+            }}
+          >Performace Analysis
+          </Typography>
+          <StudentPerformanceBarChart />
         </Paper>
       </Grid>
       {/* Recent Deposits */}
@@ -214,7 +242,7 @@ function StudentProfile() {
                 >
                   <TextField
                     id="outlined-basic"
-                    label="First Name"
+                    label="Marks"
                     variant="outlined"
                     size="small"
                     sx={{

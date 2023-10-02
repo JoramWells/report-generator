@@ -24,6 +24,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AirIcon from '@mui/icons-material/Air';
+import SchoolIcon from '@mui/icons-material/School';
 
 import {
   Collapse,
@@ -124,7 +125,7 @@ export default function Dashboard({ children }) {
       {/* students */}
       <ListItemButton onClick={handleStudentOpen}>
         <ListItemIcon>
-          <AirIcon />
+          <SchoolIcon />
         </ListItemIcon>
         <ListItemText primary="Students" />
         {studentOpen ? <ExpandLess /> : <ExpandMore />}
@@ -155,7 +156,7 @@ export default function Dashboard({ children }) {
         <ListItemIcon>
           <AirIcon />
         </ListItemIcon>
-        <ListItemText primary="Streams" />
+        <ListItemText primary="Terms" />
         {menuOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={menuOpen} timeout="auto" unmountOnExit>

@@ -44,7 +44,7 @@ export default function StudentPerformance() {
 
   return (
     <>
-      <Title>Registered Students</Title>
+      <Title>Exam Results</Title>
       <Table size="small">
         <TableHead>
           <TableRow>

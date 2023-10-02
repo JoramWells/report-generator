@@ -32,10 +32,22 @@ function AddSubject() {
     localStorage.setItem('subjects', JSON.stringify(subjects));
   };
 
+  const getSubjectName = (name) => {
+    const results = userData.filter(
+      (subj) => subj.subject.toLowerCase().includes(name.toLowerCase()),
+    );
+    if (results.length > 0) return true;
+    return false;
+  };
+
   const saveData = () => {
-    const newSubject = [...userData, inputValues];
-    setUserData(newSubject);
-    saveSubject(newSubject);
+    if (!getSubjectName(inputValues.subject)) {
+      const newSubject = [...userData, inputValues];
+      setUserData(newSubject);
+      saveSubject(newSubject);
+    } else {
+      console.log('Cannot add two subjects');
+    }
   };
 
   useEffect(() => {
